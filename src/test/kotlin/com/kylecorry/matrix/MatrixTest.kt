@@ -6,6 +6,24 @@ import org.junit.Test
 internal class MatrixTest {
 
     @Test
+    fun canSetDefaultValues(){
+        val a = Matrix(2, 3)
+        val b = Matrix(1, 2, 1.0)
+
+        val expectedA = Matrix(arrayOf(
+            arrayOf(0.0, 0.0, 0.0),
+            arrayOf(0.0, 0.0, 0.0)
+        ))
+
+        val expectedB = Matrix(arrayOf(
+            arrayOf(1.0, 1.0)
+        ))
+
+        assertEquals(expectedA, a)
+        assertEquals(expectedB, b)
+    }
+
+    @Test
     fun canDotMatrices(){
         val a = Matrix(arrayOf(
             arrayOf(1.0, 2.0),
@@ -189,6 +207,17 @@ internal class MatrixTest {
     }
 
     @Test
+    fun canGetRowsAndColumns(){
+        val a = Matrix(arrayOf(
+            arrayOf(1.0, 2.0, 3.0),
+            arrayOf(4.0, 5.0, 6.0)
+        ))
+
+        assertEquals(2, a.rows)
+        assertEquals(3, a.columns)
+    }
+
+    @Test
     fun canClone(){
         val a = Matrix(arrayOf(
             arrayOf(1.0, 2.0, 3.0),
@@ -206,5 +235,41 @@ internal class MatrixTest {
 
         b[0, 1] = 5.0
         assertEquals(2.0, a[0, 1], 0.001)
+    }
+
+    @Test
+    fun canCreateAnIdentifyMatrix(){
+        val a = Matrix.identity(2)
+
+        val expected = Matrix(arrayOf(
+            arrayOf(1.0, 0.0),
+            arrayOf(0.0, 1.0)
+        ))
+
+        assertEquals(expected, a)
+    }
+
+    @Test
+    fun canCreateAColumnMatrix(){
+        val a = Matrix.column(1.0, 2.0, 3.0)
+
+        val expected = Matrix(arrayOf(
+            arrayOf(1.0),
+            arrayOf(2.0),
+            arrayOf(3.0)
+        ))
+
+        assertEquals(expected, a)
+    }
+
+    @Test
+    fun canCreateARowMatrix(){
+        val a = Matrix.row(1.0, 2.0, 3.0)
+
+        val expected = Matrix(arrayOf(
+            arrayOf(1.0, 2.0, 3.0)
+        ))
+
+        assertEquals(expected, a)
     }
 }

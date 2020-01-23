@@ -12,9 +12,6 @@ class Matrix : Cloneable {
     val columns: Int
         get() = values[0].size
 
-    val T: Matrix
-        get() = transpose()
-
     constructor(rows: Int, cols: Int, defaultValue: Double = 0.0){
         values = Array(rows) {
             Array(cols){
@@ -27,6 +24,9 @@ class Matrix : Cloneable {
         this.values = values
     }
 
+    /**
+     * Compute the dot product between two matrices
+     */
     fun dot(other: Matrix): Matrix {
         val out = Matrix(rows, other.columns)
 
@@ -43,6 +43,9 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Compute the transpose of the matrix
+     */
     fun transpose(): Matrix {
         val out = Matrix(columns, rows)
 
@@ -55,6 +58,9 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Element wise addition of two matrices
+     */
     operator fun plus(other: Matrix): Matrix {
         if (rows != other.rows || columns != other.columns) throw IllegalArgumentException("Addition error: both matrices must have the same dimensions")
         val out = Matrix(rows, columns)
@@ -68,6 +74,9 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Element wise subtraction of two matrices
+     */
     operator fun minus(other: Matrix): Matrix {
         if (rows != other.rows || columns != other.columns) throw IllegalArgumentException("Addition error: both matrices must have the same dimensions")
         val out = Matrix(rows, columns)
@@ -81,6 +90,9 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Element wise multiplication of two matrices
+     */
     operator fun times(other: Matrix): Matrix {
         if (rows != other.rows || columns != other.columns) throw IllegalArgumentException("Addition error: both matrices must have the same dimensions")
         val out = Matrix(rows, columns)
@@ -94,6 +106,9 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Scalar multiplication of a matrix
+     */
     operator fun times(scalar: Double): Matrix {
         val out = Matrix(rows, columns)
 
@@ -106,6 +121,9 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Scalar division of a matrix
+     */
     operator fun div(scalar: Double): Matrix {
         val out = Matrix(rows, columns)
 
@@ -118,6 +136,9 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Element wise division of two matrices
+     */
     operator fun div(other: Matrix): Matrix {
         if (rows != other.rows || columns != other.columns) throw IllegalArgumentException("Addition error: both matrices must have the same dimensions")
         val out = Matrix(rows, columns)
@@ -131,14 +152,23 @@ class Matrix : Cloneable {
         return out
     }
 
+    /**
+     * Set an item in the matrix
+     */
     operator fun set(row: Int, col: Int, value: Double){
         values[row][col] = value
     }
 
+    /**
+     * Get an item from the matrix
+     */
     operator fun get(row: Int, col: Int): Double {
         return values[row][col]
     }
 
+    /**
+     * Clones the matrix
+     */
     public override fun clone(): Matrix {
         val out = Matrix(rows, columns)
 
@@ -167,6 +197,10 @@ class Matrix : Cloneable {
     }
 
     companion object {
+
+        /**
+         * Creates an identity matrix
+         */
         fun identity(size: Int): Matrix {
             val out = Matrix(size, size)
             for (i in 0 until size){
@@ -176,6 +210,9 @@ class Matrix : Cloneable {
             return out
         }
 
+        /**
+         * Creates a column matrix
+         */
         fun column(vararg values: Double): Matrix {
             val out = Matrix(values.size, 1)
             for (i in values.indices){
@@ -184,6 +221,9 @@ class Matrix : Cloneable {
             return out
         }
 
+        /**
+         * Creates a row matrix
+         */
         fun row(vararg values: Double): Matrix {
             val out = Matrix(1, values.size)
             for (i in values.indices){
