@@ -1,4 +1,7 @@
 # Matrix
+
+![](https://github.com/kylecorry31/Matrix/workflows/Java%20CI/badge.svg)
+
  A simple matrix library for Kotlin / Java
 
 ```java
