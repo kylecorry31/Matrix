@@ -1,5 +1,5 @@
 # Matrix
-
+[![Release](https://img.shields.io/github/release/kylecorry31/Matrix.svg?style=flat)](https://jitpack.io/#kylecorry31/Matrix)
 ![](https://github.com/kylecorry31/Matrix/workflows/Java%20CI/badge.svg)
 
  A simple matrix library for Kotlin / Java
